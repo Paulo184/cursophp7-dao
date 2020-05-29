@@ -15,8 +15,19 @@ require_once("config.php");
 
 ///echo json_encode($search);
 
-$usuario = new Usuario();
-$usuario->login("root", "5sadfg") ;
+/*$aluno = new Usuario();
 
-echo $usuario;
+$aluno-> setDeslogin("aluno");
+$aluno->setDessenha("@luno");
+
+$aluno-> insert();
+
+echo $aluno;*/
+$usuario = new Usuario();
+
+$usuario ->loadbyId(8);
+
+$usuario-> update("professor", "paunocu");
+
+echo "objeto";
 ?>
