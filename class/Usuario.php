@@ -45,6 +45,10 @@ class Usuario {
 
 		$sql = new Sql();
 
+		$sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+
+
 		$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
 			":ID"=>$id
 
@@ -60,7 +64,35 @@ class Usuario {
 			$this-> setDtcadastro(new DateTime($row['dtcadastro']));
 		}
 
+		public static function getList(){
+				$sql = new Sql();
+				$sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+		}
+		public static function search($login){
+			$sql = new Sql();
+			return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :$SEARCH ORDER BY deslogin", array(
+				':SEARCH'=>"%".$login."%";
+
+
+			));
+		}
+
+		public function login($login, $password){
+
+
+			$this-> setIdusuario($row['idusuario']);
+			$this-> setDeslogin($row['deslogin']);
+			$this-> setDessenha($row['dessenha']);
+			$this-> setDtcadastro(new DateTime($row['dtcadastro']));
+
+		}
+
 		public function__toString(){
+
+			return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin AND dessenha = :PASSWORD", array(
+				":LOGIN"=>$login,
+				":PASSWORD"=>$password
 
 			return json_encode(array(
 				"idusuario"=>$this->getIdusuario(),
